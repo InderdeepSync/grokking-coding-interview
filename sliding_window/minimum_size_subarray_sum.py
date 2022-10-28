@@ -2,7 +2,7 @@ import math
 from typing import List
 
 
-def min_size_subarray_length(target: int, nums: List[int]) -> int:
+def min_size_subarray_length(target: int, nums: List[int]) -> int: # Verified on Leetcode
     start, end = 0, 1
 
     min_length = math.inf
