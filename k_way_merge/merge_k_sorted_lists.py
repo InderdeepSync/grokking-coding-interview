@@ -1,5 +1,6 @@
-from typing import List
+from typing import List, Optional
 import math
+import heapq
 
 class ListNode:
     def __init__(self, value, next=None):
@@ -33,8 +34,24 @@ def merge_lists(lists: List[ListNode]): # Verified on Leetcode but very ineffici
 
     return result.next
 
+def merge_lists_efficient(lists: List[Optional[ListNode]]) -> Optional[ListNode]: # Accepted on Leetcode
+    min_heap = []
+    for index, list_node in enumerate(lists):
+        heapq.heappush(min_heap, (list_node.value, index))
 
+    result = current = ListNode("X")
+    while min_heap:
+        _, list_index = heapq.heappop(min_heap)
+        current.next = lists[list_index]
+        lists[list_index] = lists[list_index].next
 
+        if lists[list_index]:
+            heapq.heappush(min_heap, (lists[list_index].value, list_index))
+
+        current = current.next
+        current.next = None
+
+    return result.next
 
 
 if __name__ == "__main__":
@@ -49,6 +66,6 @@ if __name__ == "__main__":
     list3 = ListNode(1)
     list3.next = ListNode(3)
     list3.next.next = ListNode(4)
-    merged_list = merge_lists([list1, list2, list3])
+    merged_list = merge_lists_efficient([list1, list2, list3])
 
     print(merged_list)
