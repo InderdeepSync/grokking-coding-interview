@@ -18,7 +18,10 @@ class MaxHeap:
     # Pop the largest item off the max heap, maintaining the heap invariant
     def pop(self):
         item = heapq.heappop(self.data)
-        return -1 * item[0], item[1]
+        if isinstance(item, tuple):
+            return -1 * item[0], item[1]
+        else:
+            return -1 * item
 
     # Pop and return the current largest value, and add the new item
     def replace(self, item):
@@ -31,6 +34,9 @@ class MaxHeap:
             return -1 * item
 
         return -1 * item[0], item[1]
+
+    def __iter__(self):
+        return iter(self.data)
 
     def __len__(self):
         return len(self.data)

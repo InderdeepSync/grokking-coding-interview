@@ -1,40 +1,7 @@
 from typing import List
 import heapq
 
-
-class MaxHeap:
-
-    # Initialize the max heap
-    def __init__(self, data=None):
-        if data is None:
-            self.data = []
-        else:
-            self.data = [-i for i in data]
-            heapq.heapify(self.data)
-
-    # Push item onto max heap, maintaining the heap invariant
-    def push(self, item):
-        if isinstance(item, tuple):
-            item = (-1 * item[0], item[1])
-        heapq.heappush(self.data, item)
-
-    # Pop the largest item off the max heap, maintaining the heap invariant
-    def pop(self):
-        item = heapq.heappop(self.data)
-        return -1 * item[0], item[1]
-
-    # Pop and return the current largest value, and add the new item
-    def replace(self, item):
-        return heapq.heapreplace(self.data, -item)
-
-    # Return the current largest value in the max heap
-    def top(self):
-        item = -self.data[0]
-        return -1 * item[0], item[1]
-
-    def __len__(self):
-        return len(self.data)
-
+from utils import MaxHeap
 
 def findMaximizedCapital(k: int, w: int, profits: List[int], capital: List[int]) -> int: # Accepted on Leetcode
     max_heap = MaxHeap()
@@ -57,4 +24,4 @@ def findMaximizedCapital(k: int, w: int, profits: List[int], capital: List[int])
 
 
 if __name__ == "__main__":
-    print(findMaximizedCapital(k=1, w=0, profits=[1, 2, 3], capital=[1, 1, 2]))
+    print(findMaximizedCapital(k=2, w=0, profits=[1, 2, 3], capital=[0, 1, 1]))
