@@ -33,7 +33,7 @@ def backspaceCompare(str1: str, str2: str) -> bool: # Verified on Leetcode
 
             p2 -= 2 * temp
 
-        if p1 >= 0 and p2 < 0 or p1 < 0 and p2 >= 0:
+        if p1 >= 0 > p2 or p1 < 0 <= p2:
             return False
 
         if p1 >= 0 and p2 >= 0 and str2[p2] != str1[p1]:
@@ -43,13 +43,11 @@ def backspaceCompare(str1: str, str2: str) -> bool: # Verified on Leetcode
         p1 -= 1
 
     return p1 < 0 and p2 < 0 or \
-           p1 < 0 and str2[:p2 + 1].count("#") == math.ceil(len(str2[:p2 + 1]) / 2) or \
-           p2 < 0 and str1[:p1 + 1].count("#") == math.ceil(len(str1[:p1 + 1]) / 2)
-
+        p1 < 0 and str2[:p2 + 1].count("#") == math.ceil(len(str2[:p2 + 1]) / 2) or \
+        p2 < 0 and str1[:p1 + 1].count("#") == math.ceil(len(str1[:p1 + 1]) / 2)
 
 
 if __name__ == "__main__":
-
     input1 = "nz"
     input2 = "b#nz"
 
